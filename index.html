@@ -83,6 +83,7 @@
 <body>
 
 <div class="container" id="main-card">
+        <div id="content-wrap">
     <h1>Wees my Valentyn</h1>
     <p>Theunie wil jou <strong>@Chantel</strong> vra om sy <strong>valentyn</strong> te wees.</p>
 
@@ -90,7 +91,7 @@
         <button id="yes-btn">JA!</button>
         <button id="no-btn">Nee-wat</button>
     </div>
-
+</div>
     <div id="message" class="success-msg">
         <h2 style="color: #7ee787;">🚀 Awesome!</h2>
         <p>Sien jou die 15de!</p>
@@ -99,8 +100,8 @@
 <script>
     const noBtn = document.getElementById('no-btn');
     const yesBtn = document.getElementById('yes-btn');
-    const message = document.getElementById('success-msg');
-    const contentWrap = document.getElementById('btn-wrapper');
+    const message = document.getElementById('message');
+    const contentWrap = document.getElementById('content-wrap');
 
     let noScale = 1;
     let yesScale = 1;
