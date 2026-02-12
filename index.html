@@ -97,50 +97,54 @@
     </div>
 </div>
 <script>
-        const noBtn = document.getElementById('no-btn');
-        const yesBtn = document.getElementById('yes-btn');
-        const message = document.getElementById('message');
-        const contentWrap = document.getElementById('content-wrap');
+    const noBtn = document.getElementById('no-btn');
+    const yesBtn = document.getElementById('yes-btn');
+    const message = document.getElementById('message');
+    const contentWrap = document.getElementById('content-wrap');
 
-        let noScale = 1;
-        let yesScale = 1;
+    let noScale = 1;
+    let yesScale = 1;
 
-        const moveButton = (e) => {
-            // Prevent the tap from actually clicking the button
-            if(e) e.preventDefault();
+    const moveButton = (e) => {
+        if(e.type === 'touchstart') e.preventDefault();
 
-            noScale -= 0.1;
-            yesScale += 0.15;
-            
-            if (noScale < 0.2) noScale = 0.2; 
-            
-            noBtn.style.transform = `scale(${noScale})`;
-            yesBtn.style.transform = `scale(${yesScale})`;
+        noScale -= 0.1;
+        yesScale += 0.2;
+        
+        if (noScale < 0.2) noScale = 0.2; 
+        
+        // Update scales
+        noBtn.style.transform = `scale(${noScale})`;
+        yesBtn.style.transform = `scale(${yesScale})`;
 
-            // Calculate random position while staying within viewport bounds
-            const padding = 50;
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding) + padding/2;
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding) + padding/2;
-            
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
-        };
+        // Move the No button
+        const padding = 20;
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+        
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    };
+    noBtn.addEventListener('mouseover', moveButton);
+    noBtn.addEventListener('touchstart', moveButton, {passive: false});
 
-        // Handle both Desktop (hover) and Mobile (touch)
-        noBtn.addEventListener('mouseover', moveButton);
-        noBtn.addEventListener('touchstart', moveButton);
-
-        yesBtn.addEventListener('click', () => {
-            contentWrap.style.display = 'none';
-            message.style.display = 'block';
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
+    const handleYes = (e) => {
+        e.preventDefault();
+        
+        contentWrap.style.display = 'none';
+        message.style.display = 'block';
+        
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 }
         });
-    </script>
+    };
+
+    yesBtn.addEventListener('click', handleYes);
+    yesBtn.addEventListener('touchstart', handleYes, {passive: false});
+</script>
 </body>
 </html>
 </body>
